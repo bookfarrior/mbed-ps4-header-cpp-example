@@ -34,7 +34,7 @@ bool PS3::UpDate()
         DATA_CONTROLLER[SELECT] = (data[1] >> 5) & 0x01;
         DATA_CONTROLLER[START] = (data[1] >> 4) & 0x01;
         DATA_CONTROLLER[L3] = (data[1] >> 3) & 0x01;
-        DATA_CONTROLLER[L3] = (data[1] >> 2) & 0x01;
+        DATA_CONTROLLER[R3] = (data[1] >> 2) & 0x01;
         DATA_CONTROLLER[LeftHatX] = data[2];
         DATA_CONTROLLER[LeftHatY] = data[3];
         DATA_CONTROLLER[RightHatX] = data[4];
