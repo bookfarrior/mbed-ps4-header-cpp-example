@@ -44,7 +44,7 @@ bool PS3::UpDate()
         return 1;
     }else{
         for(int i=0;i<21;i++){
-            DATA_CONTROLLER[i] = 0;
+            DATA_CONTROLLER[i] = 15 <= i && 18 >= i ? 127 : 0;
         }
         return 0;
     }

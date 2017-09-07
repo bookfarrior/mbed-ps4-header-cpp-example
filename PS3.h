@@ -18,7 +18,7 @@ class PS3
 private:
     char data[8];
     int DATA_CONTROLLER_OLD[21];
-    I2C * i2c;
+    I2C *i2c;
     char ADDR;
 public:
     int DATA_CONTROLLER[21];
