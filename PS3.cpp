@@ -17,7 +17,9 @@ bool PS3::UpDate()
     memcpy( DATA_CONTROLLER_OLD, DATA_CONTROLLER, sizeof(DATA_CONTROLLER) );
 
     //Get data by I2C
-    if(i2c->read((ADDR | 1), data, 8) == 0) {
+    int s = i2c->read((ADDR | 1), data, 8);
+    
+    if(s == 0) {
 
         //UpDate
         DATA_CONTROLLER[CONNECTION] = (data[1] >> 1) & 0x01;
@@ -46,7 +48,7 @@ bool PS3::UpDate()
             DATA_CONTROLLER[i] = i >= 15 && i <= 18 ? 127 : 0;
         }
     }
-    return DATA_CONTROLLER[CONNECTION];
+    return s;
 }
 
 int PS3::getPress( CONTROLLER buttom )
