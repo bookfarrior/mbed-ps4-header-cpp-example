@@ -5,7 +5,7 @@ enum CONTROLLER {
     UP, RIGHT, DOWN, LEFT,
     TRIANGLE, CIRCLE, CROSS, SQUARE,
     L1, R1,
-    SELECT, START,
+    SHARE, OPTIONS,
     L3, R3,
     CONNECTION,
     LeftHatX, LeftHatY,
@@ -13,7 +13,7 @@ enum CONTROLLER {
     L2, R2
 };
 
-class PS3
+class PS4
 {
 private:
     char data[8];
@@ -22,7 +22,7 @@ private:
     char ADDR;
 public:
     int DATA_CONTROLLER[21];
-    PS3(I2C *i, char addr);
+    PS4(I2C *i, char addr);
     bool UpDate();
     int getPress( CONTROLLER buttom );
     int getClick( CONTROLLER button, bool mode );

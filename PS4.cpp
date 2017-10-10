@@ -1,6 +1,6 @@
-#include "PS3.h"
+#include "PS4.h"
 
-PS3::PS3(I2C *i, char addr)
+PS4::PS4(I2C *i, char addr)
 {
     i2c = i;
     ADDR = addr;
@@ -11,14 +11,14 @@ PS3::PS3(I2C *i, char addr)
     }
 }
 
-bool PS3::UpDate()
+bool PS4::UpDate()
 {
     //Make backup
     memcpy( DATA_CONTROLLER_OLD, DATA_CONTROLLER, sizeof(DATA_CONTROLLER) );
 
     //Get data by I2C
     int s = i2c->read((ADDR | 1), data, 8);
-    
+
     if(s == 0) {
 
         //UpDate
@@ -33,8 +33,8 @@ bool PS3::UpDate()
         DATA_CONTROLLER[SQUARE] = (data[0] >> 0) & 0x01;
         DATA_CONTROLLER[L1] = (data[1] >> 7) & 0x01;
         DATA_CONTROLLER[R1] = (data[1] >> 6) & 0x01;
-        DATA_CONTROLLER[SELECT] = (data[1] >> 5) & 0x01;
-        DATA_CONTROLLER[START] = (data[1] >> 4) & 0x01;
+        DATA_CONTROLLER[SHARE] = (data[1] >> 5) & 0x01;
+        DATA_CONTROLLER[OPTIONS] = (data[1] >> 4) & 0x01;
         DATA_CONTROLLER[L3] = (data[1] >> 3) & 0x01;
         DATA_CONTROLLER[R3] = (data[1] >> 2) & 0x01;
         DATA_CONTROLLER[LeftHatX] = data[2];
@@ -44,14 +44,14 @@ bool PS3::UpDate()
         DATA_CONTROLLER[L2] = data[6];
         DATA_CONTROLLER[R2] = data[7];
     } else {
-        for(int i = 0; i < 21; i++){
+        for(int i = 0; i < 21; i++) {
             DATA_CONTROLLER[i] = i >= 15 && i <= 18 ? 127 : 0;
         }
     }
     return s;
 }
 
-int PS3::getPress( CONTROLLER buttom )
+int PS4::getPress( CONTROLLER buttom )
 {
     if(buttom < 21) {
         return DATA_CONTROLLER[buttom];
@@ -60,7 +60,7 @@ int PS3::getPress( CONTROLLER buttom )
     }
 }
 
-int PS3::getClick( CONTROLLER button, bool mode )
+int PS4::getClick( CONTROLLER button, bool mode )
 {
     //mode:0 -> Rising
     //mode:1 -> Falling
